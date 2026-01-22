@@ -19,16 +19,24 @@
 
 ```mermaid
 graph LR
-    User[사용자 Client] -->|1. 예매 요청 (HTTP)| API_GW[Gateway / Queueing Service]
-    API_GW -->|2. 대기열 등록 (ZADD)| Redis[(Redis Cluster)]
+    User[사용자 Client]
+    API_GW[Gateway / Queueing Service]
+    Redis[(Redis Cluster)]
+    DB[(Database)]
+
+    User -->|1. 예매 요청 (HTTP)| API_GW;
+    API_GW -->|2. 대기열 등록 (ZADD)| Redis;
     
     subgraph "Async Processing Zone"
-        Worker[Consumer Worker] -->|3. 처리 가능량 확인 & 가져오기| Redis
-        Worker -->|4. 고속 통신 (gRPC)| Core_Logic[결제/예약 Core Service]
-        Core_Logic -->|5. 최종 저장| DB[(Database)]
+        Worker[Consumer Worker];
+        Core_Logic[결제/예약 Core Service];
+
+        Worker -->|3. 처리 가능량 확인 & 가져오기| Redis;
+        Worker -->|4. 고속 통신 (gRPC)| Core_Logic;
+        Core_Logic -->|5. 최종 저장| DB;
     end
     
-    User -.->|6. 내 순서 확인 (Polling/WebSocket)| API_GW
+    User -.->|6. 내 순서 확인 (Polling/WebSocket)| API_GW;
 ```
 
 ### 3.2 핵심 기술 및 도구 선정
