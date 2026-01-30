@@ -21,6 +21,9 @@
 - *(작성 예정)* 분산 트랜잭션 처리 전략 (Saga Pattern vs 2PC)
 - *(작성 예정)* CQRS 패턴을 활용한 읽기/쓰기 성능 분리
 
+### Spring Framework Internals
+- **[Scenario 03]** Spring Boot Request Lifecycle (Deep Dive) `DispatcherServlet` `HandlerMapping` `Filter vs Interceptor`
+
 ## 🛠 Tech Stack & Keywords
 - **Core:** Java/Spring Boot, Python, Go etc.
 - **Data & Cache:** Redis (In-memory), MySQL, PostgreSQL
